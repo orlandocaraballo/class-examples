@@ -1,0 +1,8 @@
+a {
+  display: inline-block;
+  padding: .25em;
+  border: 1px solid black;
+  border-radius: .5em;
+  cursor: pointer;
+  margin-left: .5em;
+}

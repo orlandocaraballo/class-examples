@@ -1,0 +1,13 @@
+{
+  "name": "modules-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

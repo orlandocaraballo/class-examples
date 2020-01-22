@@ -1,0 +1,23 @@
+ul {
+  padding: .5em;
+  border: 1px dotted red;
+}
+
+li {
+  list-style: none;
+}
+
+li h3 {
+  text-transform: capitalize;
+}
+
+nav {
+  border: 1px dotted black;
+  padding: .5em;
+}
+
+footer {
+  font-weight: bold;
+  border: 1px dotted blue;
+  padding: .5em;
+}

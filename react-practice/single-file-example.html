@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Training</title>
+    <link rel="stylesheet" href="main.css">
+    <script defer src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script defer src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
+    <!-- Don't use this in production: -->
+    <script defer src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Person extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            age: props.age
+          };
+          
+          // set our handler for clicking a list item
+          this.increaseAge = this.increaseAge.bind(this);
+          this.decreaseAge = this.decreaseAge.bind(this);
+        }
+
+        increaseAge() {
+          // set state of counter
+          this.setState((state, props) => ({
+            age: ++state.age
+          }));
+        }
+
+        decreaseAge() {
+          // set state of counter
+          this.setState((state, props) => ({
+            age: --state.age
+          }));
+        }
+
+        render() {
+          return (
+            <li onClick={ this.click }>
+              <span>Hello { this.props.name }, you are { this.state.age } year(s) old</span>
+              <a onClick={ this.increaseAge } >Increase Age</a>
+              <a onClick={ this.decreaseAge } >Decrease Age</a>
+            </li>
+          );
+        }
+      }
+
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { count: 0 };
+          
+          // required in order for this to work within buttonClick
+          this.goUp = this.goUp.bind(this);
+          this.goDown = this.goDown.bind(this);
+        }
+
+        // button handler
+        goUp(event) {
+          event.preventDefault();
+
+          // set state of counter
+          this.setState((state, props) => ({
+            count: ++state.count
+          }));
+
+          console.log(`The current count is now set to: ${ this.state.count }`);
+        }
+
+        goDown(event) {
+          event.preventDefault();
+
+          // set state of counter
+          this.setState((state, props) => ({
+            count: --state.count
+          }));
+
+          console.log(`The current count is now set to: ${ this.state.count }`);
+        }
+        
+        render() {
+          return (
+            <ul>
+              <Person name="Patrisha C" age="35" />
+              <Person name="Denisse C" age="24" />
+              <Person name="Orlando C" age="35" />
+              
+              <button onClick={ this.goUp }>
+                Go up!
+              </button>
+              <button onClick={ this.goDown }>
+                Go down!
+              </button>
+            </ul>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+      );
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>

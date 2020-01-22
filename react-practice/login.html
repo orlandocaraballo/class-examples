@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login Example</title>
+    <link rel="stylesheet" href="login.css">
+    <script defer src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script defer src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
+    <!-- Don't use this in production: -->
+    <script defer src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class UserGreeting extends React.Component {
+        render() {
+          return (
+            <h2>Welcome back!</h2>
+          );
+        }
+      }
+
+      class GuestGreeting extends React.Component {
+        render() {
+          return (
+            <h2>Please login.</h2>
+          );
+        }
+      }
+
+      class Greeting extends React.Component {
+        render() {
+          return (
+            this.props.loggedIn ? <UserGreeting /> : <GuestGreeting />
+          );
+        }
+      }
+
+      class LoginButton extends React.Component {
+        render() {
+          return (
+            <button onClick={ this.props.onClick }>
+              Login
+            </button>
+          );
+        }
+      }
+
+      class LogoutButton extends React.Component {
+        render() {
+          return (
+            <button onClick={ this.props.onClick }>
+              Logout
+            </button>
+          );
+        }
+      }
+
+      class Navbar extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            loggedIn: false
+          };
+
+          this.loginClick = this.loginClick.bind(this);
+          this.logoutClick = this.logoutClick.bind(this);
+        }
+
+        loginClick() {
+          this.setState({ loggedIn: true });
+        }
+
+        logoutClick() {
+          this.setState({ loggedIn: false });
+        }
+
+        render() {
+          let buttonElement;
+          const loggedIn = this.state.loggedIn;
+
+          if(loggedIn) {
+            buttonElement = <LogoutButton onClick={ this.logoutClick } />;
+          } else {
+            buttonElement = <LoginButton onClick={ this.loginClick } />;
+          }
+
+          return (
+            <nav>
+              <Greeting loggedIn={ loggedIn } />
+              { buttonElement }
+            </nav>
+          );
+        }
+      }
+
+      class Post extends React.Component {
+        render() {
+          return (
+            <li>
+              <h3>{ this.props.title }</h3>
+              <p>{ this.props.content }</p>
+            </li>
+          );
+        }
+      }
+
+      class Posts extends React.Component {
+        render() {
+          const posts = this.props.posts.map((post, index) => {
+            return <Post title={ post.title } content={ post.content } key={ index } />
+          });
+
+          return (
+            <ul>{ posts }</ul>
+          );
+        }
+      }
+
+      class Footer extends React.Component {
+        render() {
+          return (
+            <footer>
+              I am the footer
+            </footer>
+          );
+        }
+      }
+
+      class App extends React.Component {
+        render() {
+          return (
+            <div>
+              <Navbar />
+              <Posts posts={ this.props.posts } />
+              <Footer />
+            </div>
+          );
+        }
+      }
+
+      const posts = [
+        { title: "title 1", content: "this is the content 1" },
+        { title: "title 2", content: "this is the content 2" },
+        { title: "title 3", content: "this is the content 3" }
+      ];
+
+      ReactDOM.render(
+        <App posts={ posts } />,
+        document.getElementById('root')
+      )
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>

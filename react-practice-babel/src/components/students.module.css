@@ -1,0 +1,35 @@
+.student {
+  background-color: #f8f8f8;
+}
+
+.students {
+  padding: 0;
+  margin: 1em;
+}
+
+.students > li {
+  list-style: none;
+  padding: 0.5em;
+  margin-top: 1em;
+}
+
+form {
+  padding: 0 1em;
+}
+
+input {
+  width: 15em;
+  margin-left: 1em;
+  height: 2em;
+  font-size: 1em;
+  padding: 0 0.5em;
+}
+
+input:first-child {
+  margin-left: 0;
+}
+
+input[type="submit"] {
+  height: 2.3em;
+  padding: 0;
+}

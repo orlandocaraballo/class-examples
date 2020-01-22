@@ -1,0 +1,25 @@
+li {
+  list-style: none;
+  padding: 0.5em;
+  margin-top: 1em;
+}
+
+.details li:first-child {
+  margin-top: 0;
+}
+
+h2 {
+  text-transform: capitalize;
+}
+
+nav {
+  margin: 1em;
+}
+
+.details {
+  padding: 0;
+}
+
+.details li {
+  padding-left: 0;
+}
