@@ -1,4 +1,5 @@
-const { Client } = require("pg");
+const pg = require("pg");
+const Client = pg.Client;
 
 // define the connection details
 const client = new Client({
