@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 
+// http://localhost:3000/?name=orlando
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {

@@ -1,0 +1,61 @@
+header,
+footer,
+article,
+aside {
+  text-align: center;
+  height: 200px;
+}
+
+header {
+  background-color: aquamarine;
+}
+
+footer {
+  background-color: darkgoldenrod;
+}
+
+article {
+  background-color: indigo;
+  color: white;
+  flex-grow: 3;
+}
+
+aside {
+  background-color: navy;
+  color: white;
+  flex-grow: 1;
+}
+
+main {
+  display: flex;
+}
+
+nav {
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+nav a {
+  display: block;
+}
+
+/* nav a:visited {
+  color: rgb(36, 128, 0);
+} */
+
+@media (max-width: 800px) and (min-width: 600px) {
+  main {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 599px) {
+  main {
+    flex-direction: column;
+  }
+
+  main article {
+    background-color: red;
+  }
+}

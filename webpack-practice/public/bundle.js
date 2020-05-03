@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/handlers.js":
+/*!*************************!*\
+  !*** ./src/handlers.js ***!
+  \*************************/
+/*! exports provided: clickHandler, scrollHandler */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"clickHandler\", function() { return clickHandler; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"scrollHandler\", function() { return scrollHandler; });\nconst clickHandler = (event) => {\n  fetch(\"localhost:3000/\");\n  console.log(\"clicked\");\n};\n\nconst scrollHandler = (event) => {\n  console.log(\"scrolling\");\n};\n\n\n//# sourceURL=webpack:///./src/handlers.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -94,30 +106,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _orlando__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./orlando */ \"./src/orlando.js\");\n// ALL CODE IMPORTED FROM THIS FILE WILL BE BUNDLED\n// INTO OUR bundle.js THAT IS USED IN OUR index.html FILE\n\n// this style of module is called CommonJS module\n//    typically you will see this in your backend\nconst {\n  patrishaName,\n  patrishaAge,\n  patrishaGender,\n  patrishaInfo\n} = __webpack_require__(/*! ./patrisha */ \"./src/patrisha.js\");\n\nconsole.log(\"Patrisha's info ->\", patrishaName, patrishaAge, patrishaGender);\nconsole.log(patrishaInfo());\n\n// this is called a EcmaScript module\n//    typically you will see in your frontend\n//    Note: NodeJS is slowly moving towards this style of module going forward\n\n\nconsole.log(\"Orlando's info ->\", _orlando__WEBPACK_IMPORTED_MODULE_0__[\"orlandoName\"], _orlando__WEBPACK_IMPORTED_MODULE_0__[\"orlandoAge\"], _orlando__WEBPACK_IMPORTED_MODULE_0__[\"orlandoGender\"]);\nconsole.log(Object(_orlando__WEBPACK_IMPORTED_MODULE_0__[\"default\"])());\n\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/orlando.js":
-/*!************************!*\
-  !*** ./src/orlando.js ***!
-  \************************/
-/*! exports provided: orlandoName, orlandoAge, orlandoGender, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"orlandoName\", function() { return orlandoName; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"orlandoAge\", function() { return orlandoAge; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"orlandoGender\", function() { return orlandoGender; });\n// these are referred to as named exports\n//    we can have as many named exports as we please\n// we must remember that whatever we name our exports\n//    will be the same name that is used on the file that imports these variables\nconst orlandoName = \"orlando\";\nconst orlandoAge = 35;\nconst orlandoGender = \"male\";\n\n// this is referred to as a default export\n// there can be only default export per module\n//    we can rename our default export in the file that imports it\n/* harmony default export */ __webpack_exports__[\"default\"] = (() => {\n  return `${orlandoName} / ${orlandoAge} / ${orlandoGender}`;\n});\n\n\n//# sourceURL=webpack:///./src/orlando.js?");
-
-/***/ }),
-
-/***/ "./src/patrisha.js":
-/*!*************************!*\
-  !*** ./src/patrisha.js ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("const name = \"patrisha\";\nconst age = \"35\";\nconst gender = \"female\";\n\nmodule.exports = {\n  patrishaName: name,\n  patrishaAge: age,\n  patrishaGender: gender,\n  patrishaInfo: () => {\n    return `${name} - ${age} - ${gender}`;\n  }\n};\n\n\n//# sourceURL=webpack:///./src/patrisha.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handlers */ \"./src/handlers.js\");\n\n\nconst button = document.getElementsByTagName(\"button\")[0];\n\nbutton.addEventListener(\"click\", _handlers__WEBPACK_IMPORTED_MODULE_0__[\"clickHandler\"]);\n\nwindow.addEventListener(\"scroll\", _handlers__WEBPACK_IMPORTED_MODULE_0__[\"scrollHandler\"]);\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
