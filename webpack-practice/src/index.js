@@ -1,4 +1,4 @@
-import { clickHandler, scrollHandler } from "./handlers";
+import nameLogger, { clickHandler, scrollHandler } from "./handlers";
 
 const button = document.getElementsByTagName("button")[0];
 
