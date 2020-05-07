@@ -39,10 +39,21 @@ $ vim [path to file] # opens a file in vim text editor]
 
 ## Process Management
 
+[HTOP](https://hisham.hm/htop/)
+_Live information about your system and its processes_
+
+```sh
+$ htop
+```
+
+_For a snapshot of your currently running processes_
+
 ```sh
 $ ps aux # gives information on processes running on your system
 $ ps aux | grep [process name] # retrieve info only on [process name] 
 ```
+
+_Stop processes_
 
 ```sh
 $ killall [process name] # stops [process] from running
@@ -57,7 +68,9 @@ $ killall node # kills all node processes currently running
 $ grep [text] [path to file] # search within file for text
 ```
 
-## Network Request
+
+
+## Network Requests
 
 ```sh
 $ curl [url]
@@ -94,4 +107,12 @@ $ brew install [cask name]
 $ brew uninstall [cask name]
 $ brew cleanup
 $ brew doctor
+```
+
+## Ubuntu Linux
+
+```sh
+$ sudo apt install [package name]
+$ sudo apt remove [package name]
+$ sudo apt update && sudo apt upgrade
 ```
