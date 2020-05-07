@@ -5,17 +5,26 @@ _Below are some of the more common commands I find myself using as a developer a
 
 ## Help
 
+_Most common commands for understanding how to use a unix command_
+
 ```sh
 $ man [command] # access manual of a unix [command]
 $ [command] --help # usually accesses help of [command]
+```
+
+[TLDR](https://tldr.sh/)
+
+```sh
 $ tldr [command]
 ```
 
-## Read File
+## Reading a File
 
 ```sh
 $ cat [path to file] # outputs the text contained within a file to the terminal
 $ less [path to file] # opens file for reading
+$ tail [path to file] # outputs only the end of a file
+$ head [path to file] # outputs only the beginning of a file
 ```
 
 ## Open w/ Text Editor
@@ -29,8 +38,8 @@ $ vim [path to file] # opens a file in vim text editor]
 ## Process Management
 
 ```sh
-$ ps aux
-$ ps aux | grep [process]
+$ ps aux # gives information on processes running on your system
+$ ps aux | grep [process name] # retrieve info only on [process name] 
 ```
 
 ```sh
@@ -67,8 +76,8 @@ $ nvm alias default [version of node js]
 [NPM](https://www.npmjs.com/)
 
 ```sh
-$ npm install
-$ npm install [module]
+$ npm install # installs modules listed in local package.json file
+$ npm install [module] # install module in current directory
 $ npm install [module] -g # install globally
 $ npm install [module] --save-dev # install as dev dependancy
 $ npm list [module] # display all listings first
