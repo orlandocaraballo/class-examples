@@ -14,6 +14,8 @@ $ [command] --help # usually accesses help of [command]
 
 [TLDR](https://tldr.sh/)
 
+_Simpler man pages_
+
 ```sh
 $ tldr [command]
 ```
