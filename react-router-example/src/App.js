@@ -8,14 +8,22 @@ class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      people: []
     };
+  }
+
+  componentDidMount() {
+    this.setState({ people: [{ name: "orlando" }, { name: "john" }] });
   }
 
   render() {
     return (
       <footer>
-        <h2>Footer Text</h2>
+        <h2>
+          {this.state.people.map((person) => (
+            <li>{person.name}</li>
+          ))}
+        </h2>
       </footer>
     );
   }
@@ -46,9 +54,6 @@ function Nav() {
 }
 
 function Homepage(props) {
-  {
-    console.log(props);
-  }
   return (
     <main>
       <h1>{props.title}</h1>
@@ -64,7 +69,9 @@ function Homepage(props) {
   );
 }
 
-function Page1() {
+function Page1(props) {
+  console.log(props);
+
   return (
     <main>
       <img alt="Page 1" src="fry.png" />
@@ -81,7 +88,8 @@ function Page2() {
 }
 
 function PuppyPage(props) {
-  return <p>Puppy id -> {props.match.params.id}</p>;
+  console.log(props);
+  return <p>Puppy id -> {props.match.params.puppyId}</p>;
 }
 
 function TestPropsPage(props) {
@@ -100,14 +108,16 @@ function App() {
       <Route
         exact
         path="/"
-        render={props => <Homepage title={TITLE} {...props} />}
+        render={(props) => <Homepage title={TITLE} {...props} />}
       />
       <Route path="/page-1" component={Page1} />
       <Route path="/page-2" component={Page2} />
-      <Route path="/puppies/:id" component={PuppyPage} />
+      <Route path="/puppies/:puppyId" component={PuppyPage} />
       <Route
         path="/test-props"
-        render={props => <TestPropsPage name="Orlando Caraballo" {...props} />}
+        render={(props) => (
+          <TestPropsPage name="Orlando Caraballo" {...props} />
+        )}
       />
 
       <Footer />

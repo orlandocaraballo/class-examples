@@ -10,6 +10,7 @@
   "author": "Orlando Caraballo",
   "license": "ISC",
   "dependencies": {
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6"
   }
 }
