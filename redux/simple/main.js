@@ -1,11 +1,14 @@
+// because we are using this on our backend,
+//  we need to use the require syntax in order to use the
+//  redux module
 const { createStore, applyMiddleware } = require("redux");
 const { logger } = require("redux-logger");
-
-const initialState = { amount: 0 };
 
 // action types
 const DEPOSIT = "DEPOSIT";
 const WITHDRAW = "WITHDRAW";
+
+const initialState = { amount: 0 };
 
 // action creators
 const depositActionCreator = (amount) => ({
@@ -18,12 +21,20 @@ const withdrawActionCreator = (amount) => ({
   amount: amount
 });
 
+// a sample logging middleware
 const loggingMiddleware = (store) => (next) => (action) => {
+  // we can do whatever we want in a middleware
+
+  // in this case we are assigning a new piece of data
+  //  onto the action...
+  // if other middlewares are applied after this one, that middleware
+  //  would also have the name key set to "Orlando" on the action
   action.name = "Orlando";
   console.log("action type", action.name);
   return next(action);
 };
 
+// this is a longer form of writing the logging middleware above
 // const loggingMiddleware = (store) => {
 //   return (next) => {
 //     return (action) => {
