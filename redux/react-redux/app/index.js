@@ -1,28 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import store from "./store";
-import { incrementActionCreator } from "./actionCreators";
+import { incrementCount } from "./actionCreators";
+import { Provider, connect } from "react-redux";
 
 class Counter extends React.Component {
   constructor() {
     super();
     this.increment = this.increment.bind(this);
-    this.state = store.getState();
-
-    store.subscribe(() => {
-      this.setState(store.getState());
-    });
   }
 
   increment() {
-    store.dispatch(incrementActionCreator());
+    // store.dispatch(incrementCount());
+    this.props.incrementCount();
   }
 
   render() {
     return (
       <div id="container">
         <div id="counter">
-          <h1>{this.state.count}</h1>
+          <h1>{this.props.count}</h1>
           <button onClick={this.increment}>Increment</button>
         </div>
       </div>
@@ -30,4 +27,22 @@ class Counter extends React.Component {
   }
 }
 
-ReactDOM.render(<Counter />, document.getElementById("app"));
+const mapStateToProps = (state) => ({
+  count: state.count,
+  amount: state.amount
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  incrementCount: () => dispatch(incrementCount())
+});
+
+// const mapDispatchToProps = { incrementCount };
+
+const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedCounter />
+  </Provider>,
+  document.getElementById("app")
+);

@@ -1,5 +1,5 @@
 import { INCREMENT } from "./actionTypes";
 
-export const incrementActionCreator = () => ({
+export const incrementCount = () => ({
   type: INCREMENT
 });
