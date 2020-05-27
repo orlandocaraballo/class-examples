@@ -12,14 +12,16 @@ class Counter extends React.Component {
 
   increment() {
     // store.dispatch(incrementCount());
-    this.props.incrementCount();
+    // this.props.incrementCount();
+    console.log(this.props);
   }
 
   render() {
     return (
       <div id="container">
         <div id="counter">
-          <h1>{this.props.count}</h1>
+          <h1>0</h1>
+
           <button onClick={this.increment}>Increment</button>
         </div>
       </div>
