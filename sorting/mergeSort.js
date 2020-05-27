@@ -18,7 +18,7 @@ function split(array) {
 //  this function returns a new array
 //  that stores all elements from left and right
 //  but in sorted order
-function merge(leftUnsortedArray, rightUnsortedArray) {
+function merge(leftUnsortedArray, rightUnsortedArray, comparator) {
   // set some base indices as the starting point for looping through
   //  the left and right unsorted arrays
   let leftIndex = 0,
@@ -36,9 +36,10 @@ function merge(leftUnsortedArray, rightUnsortedArray) {
     leftIndex < leftUnsortedArray.length &&
     rightIndex < rightUnsortedArray.length
   ) {
-    // if first element of left array is smaller then the first element of the
-    //  right array, then copy that element to the sorted array
-    if (leftUnsortedArray[leftIndex] < rightUnsortedArray[rightIndex]) {
+    // we defer comparison to our comparator function
+    if (
+      comparator(leftUnsortedArray[leftIndex], rightUnsortedArray[rightIndex])
+    ) {
       sortedArray[sortedArrayIndex] = leftUnsortedArray[leftIndex];
       leftIndex++;
     } else {
@@ -66,7 +67,7 @@ function merge(leftUnsortedArray, rightUnsortedArray) {
   return sortedArray;
 }
 
-function mergeSort(array) {
+function mergeSort(array, comparator) {
   // --------- BASE CASE BELOW ---------
 
   // if array consists of only 1 element then return the array
@@ -80,21 +81,24 @@ function mergeSort(array) {
   const [left, right] = split(array);
 
   // sort left half
-  const leftSortedHalf = mergeSort(left);
+  const leftSortedHalf = mergeSort(left, comparator);
 
   // sort right half
-  const rightSortedHalf = mergeSort(right);
+  const rightSortedHalf = mergeSort(right, comparator);
 
   // -----------------------------------
 
   // merge the left and right arrays together
-  return merge(leftSortedHalf, rightSortedHalf);
+  return merge(leftSortedHalf, rightSortedHalf, comparator);
 }
 
 // get console arguments if they exist otherwise detault to 100
 const numberOfElements = Number(process.argv[2]) || 100;
 const constructRandomNumberArray = require("./constructRandomNumberArray");
 const unsortedArray = constructRandomNumberArray(numberOfElements);
-const sortedArray = mergeSort(unsortedArray);
+const sortedArray = mergeSort(
+  unsortedArray,
+  (valueA, valueB) => valueA < valueB // our comparator function is sorting in ascending order
+);
 
 console.log(unsortedArray, sortedArray);
