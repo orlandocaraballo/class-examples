@@ -18,7 +18,7 @@ function split(array) {
 //  this function returns a new array
 //  that stores all elements from left and right
 //  but in sorted order
-function merge(leftUnsortedArray, rightUnsortedArray, comparator) {
+function merge(leftArray, rightArray, comparator) {
   // set some base indices as the starting point for looping through
   //  the left and right unsorted arrays
   let leftIndex = 0,
@@ -27,25 +27,25 @@ function merge(leftUnsortedArray, rightUnsortedArray, comparator) {
 
   // create an empty array with a total size of both left and right unsorted arrays combined
   const sortedArray = new Array(
-    leftUnsortedArray.length + rightUnsortedArray.length
+    leftArray.length + rightArray.length
   );
 
   // loop only while both the left and right indices
   //  have not exceeded the bounds of the their unsorted array counterparts
   while (
-    leftIndex < leftUnsortedArray.length &&
-    rightIndex < rightUnsortedArray.length
+    leftIndex < leftArray.length &&
+    rightIndex < rightArray.length
   ) {
     // we defer comparison to our comparator function
     if (
-      comparator(leftUnsortedArray[leftIndex], rightUnsortedArray[rightIndex])
+      comparator(leftArray[leftIndex], rightArray[rightIndex])
     ) {
-      sortedArray[sortedArrayIndex] = leftUnsortedArray[leftIndex];
+      sortedArray[sortedArrayIndex] = leftArray[leftIndex];
       leftIndex++;
     } else {
       // if first element of right array is smaller then the first element of the
       //  left array, then copy that element to the sorted array
-      sortedArray[sortedArrayIndex] = rightUnsortedArray[rightIndex];
+      sortedArray[sortedArrayIndex] = rightArray[rightIndex];
       rightIndex++;
     }
 
@@ -54,13 +54,13 @@ function merge(leftUnsortedArray, rightUnsortedArray, comparator) {
 
   // loop thru the remaining elements (there should be only 1 left)
   //  and copy that last element into the sorted array
-  for (let i = leftIndex; i < leftUnsortedArray.length; i++) {
-    sortedArray[sortedArrayIndex] = leftUnsortedArray[i];
+  for (let i = leftIndex; i < leftArray.length; i++) {
+    sortedArray[sortedArrayIndex] = leftArray[i];
     sortedArrayIndex++;
   }
 
-  for (let i = rightIndex; i < rightUnsortedArray.length; i++) {
-    sortedArray[sortedArrayIndex] = rightUnsortedArray[i];
+  for (let i = rightIndex; i < rightArray.length; i++) {
+    sortedArray[sortedArrayIndex] = rightArray[i];
     sortedArrayIndex++;
   }
 
@@ -71,7 +71,7 @@ function mergeSort(array, comparator) {
   // --------- BASE CASE BELOW ---------
 
   // if array consists of only 1 element then return the array
-  if (array.length === 1 || array.length === 0) return array;
+  if (array.length < 2) return array;
 
   // -----------------------------------
 
