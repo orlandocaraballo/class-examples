@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import store from "./store"; // imported for you already
-import { INCREMENT_COUNT } from "./actionTypes";
+import { INCREMENT } from "./actionTypes";
 import { connect, Provider } from "react-redux";
 
 class Counter extends React.Component {
@@ -11,14 +11,14 @@ class Counter extends React.Component {
   }
 
   increment() {
-    this.props.incrementCount();
+    this.props.incrementCountInReact();
   }
 
   render() {
     return (
       <div id="container">
         <div id="counter">
-          <h1>{this.props.count}</h1>
+          <h1>{this.props.countInReact}</h1>
           <button type="button" onClick={this.increment}>
             Increment
           </button>
@@ -31,24 +31,24 @@ class Counter extends React.Component {
 /*
   we map the names of properties from the state
     to props:
-    - state.count becomes props.count in the component
+    - state.count becomes props.countInReact in the component
 */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    count: state.count
+    countInReact: state.count
   };
 };
 
 /*
   we map the names of properties from the state
     to props:
-    - dispatch({ type: INCREMENT_COUNT}) becomes props.incrementCount
+    - dispatch({ type: INCREMENT_COUNT}) becomes props.incrementCountInReact
 */
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    incrementCount: () => {
+    incrementCountInReact: () => {
       dispatch({
-        type: INCREMENT_COUNT
+        type: INCREMENT
       });
     }
   };
@@ -57,10 +57,7 @@ const mapDispatchToProps = dispatch => {
 // here we connect the mapped props
 //    to our component and created a connected
 //    component
-const ConnectedCounter = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Counter);
+const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
 // we must wrap our connected component
 //    with the Provider component

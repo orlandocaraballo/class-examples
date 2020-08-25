@@ -1,54 +1,33 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import { INCREMENT_COUNT, STUDENTS_LOADED } from "./actionTypes";
-import logger from "redux-logger";
-import thunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
+import reduxLogger from "redux-logger";
 
-const counterReducer = (state = { count: 0 }, action) => {
-  switch (action.type) {
-    case INCREMENT_COUNT:
-      return { ...state, count: state.count + 1 };
-    default:
-      return state;
-  }
+// Type constants
+export const INCREMENT = "INCREMENT";
+
+// Action creators
+export const increment = () => {
+  return {
+    type: INCREMENT
+  };
 };
 
-const studentsReducer = (state = { students: [] }, action) => {
+// reducer
+
+const initialState = {
+  count: 0
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case STUDENTS_LOADED:
+    case INCREMENT:
       return {
-        ...state,
-        students: action.students.sort((a, b) => {
-          // make sure to sort students by name
-          if (a.name > b.name) return 1;
-          if (a.name < b.name) return -1;
-          return 0;
-        })
+        count: state.count + 1
       };
     default:
       return state;
   }
 };
 
-// we are taking the two reducers
-//  and creating one reducer from it where the keys of the
-//  new reducer correspond to the keys of object defined below
-
-// in other words our staste will now look like this
-//  {
-//    state: {
-//      counter: { count: 0 },
-//      students: { students: [] }
-//    }
-//  }
-// by default
-
-// state: { count: 1, students: [...] }
-// state: { counter: { count: 1 }, students: { students: [...] } }
-const mainReducer = combineReducers({
-  counter: counterReducer,
-  students: studentsReducer
-});
-
-const store = createStore(mainReducer, applyMiddleware(logger, thunk));
+const store = createStore(reducer, applyMiddleware(reduxLogger));
 
 export default store;
