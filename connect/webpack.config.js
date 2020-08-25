@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    index: ["babel-polyfill", "./app/index.js"]
+    index: ["babel-polyfill", "./app/ConnectedIndexWithThunkCombined.js"]
   },
   output: {
     path: __dirname,

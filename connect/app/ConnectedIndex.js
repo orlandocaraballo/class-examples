@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import store from "./store"; // imported for you already
-import { INCREMENT } from "./actionTypes";
+import store, { INCREMENT } from "./store"; // imported for you already
 import { connect, Provider } from "react-redux";
 
 class Counter extends React.Component {
@@ -11,7 +10,7 @@ class Counter extends React.Component {
   }
 
   increment() {
-    this.props.incrementCountInReact();
+    this.props.incrementCount();
   }
 
   render() {
@@ -31,7 +30,7 @@ class Counter extends React.Component {
 /*
   we map the names of properties from the state
     to props:
-    - state.count becomes props.countInReact in the component
+    - state.count becomes props.count in the component
 */
 const mapStateToProps = (state) => {
   return {
@@ -42,11 +41,11 @@ const mapStateToProps = (state) => {
 /*
   we map the names of properties from the state
     to props:
-    - dispatch({ type: INCREMENT_COUNT}) becomes props.incrementCountInReact
+    - dispatch({ type: INCREMENT_COUNT}) becomes props.incrementCount
 */
 const mapDispatchToProps = (dispatch) => {
   return {
-    incrementCountInReact: () => {
+    incrementCount: () => {
       dispatch({
         type: INCREMENT
       });
