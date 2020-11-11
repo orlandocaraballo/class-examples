@@ -5,7 +5,7 @@ const Client = pg.Client;
 const client = new Client({
   host: "localhost",
   user: "orlandocaraballo",
-  database: "exampledb"
+  database: "exampledb",
 });
 
 const getFood = async () => {
