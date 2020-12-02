@@ -8,6 +8,8 @@ const client = new Client({
   database: "exampledb",
 });
 
+const client = new Client("postgres://localhost/exampledb")
+
 const getFood = async () => {
   // first we must open a connection to our db
   client.connect();

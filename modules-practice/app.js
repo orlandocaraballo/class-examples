@@ -1,3 +1,3 @@
-import fs from "fs";
+const chalk = require("chalk");
 
-// fs.readFile("app.mjs", "UTF-8", (err, data) => console.log(data));
+console.log(chalk.cyan("Hello"));

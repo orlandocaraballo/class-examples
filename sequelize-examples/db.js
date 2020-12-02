@@ -1,57 +1,35 @@
 const Sequelize = require("sequelize");
-const db = new Sequelize("postgres://localhost:5432/sequelize_examples");
+const db = new Sequelize("postgres://localhost/sequelize-examples");
 
+// this defines our user model
+//  notice how user is singular but the corresponding
+//  table name would be plural
 const User = db.define("user", {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
+  pictureUrl: Sequelize.STRING,
 });
-
-const Post = db.define("post", {
-  content: {
-    type: Sequelize.TEXT,
-    allowNull: false
-  }
-});
-
-User.hasMany(Post);
-Post.belongsTo(User);
 
 (async () => {
-  await db.sync({ force: true });
+  // syncronizes with our database
+  //  the { force: true} statement (re)creates our table
+  //  (even it already exists)
+  await User.sync({ force: true });
 
-  const orlando = await User.create({
-    name: "Orlando C",
-    email: "orlando.caraballo@fullstackacademy.com"
+  // creates a new user object
+  const user = new User({
+    name: "Orlando",
+    pictureUrl: "http://picture-of-myself.jpg",
   });
-  // const bryce = await User.create({ name: "Bryce" });
-  // const malka = await User.create({ name: "Malka" });
-  // const sayeed = await User.create({ name: "Sayeed" });
 
-  await Post.create({ content: "bla bla bla 1", userId: orlando.id });
-  await Post.create({ content: "bla bla bla 2", userId: orlando.id });
-  await Post.create({ content: "bla bla bla 3", userId: orlando.id });
+  // saves our user object to the database
+  await user.save();
 
-  const firstPost = await Post.findByPk(1);
+  // this loads all people from the database
+  const users = await User.findAll();
 
-  firstPost.getUser();
-
-  const user = await firstPost.getUser();
-
-  user.getPosts();
-
-  const allPosts = await user.getPosts();
-
-  console.log(allPosts[2].content);
-
-  //   const users = await User.findAll();
-  //   const posts = await users[0].getPosts();
-  //   console.log("-------------------------");
-  //   console.log(posts[0].content);
-  //   console.log("-------------------------");
+  // displays all users in the console
+  console.log("all the users -> ", users);
 })();

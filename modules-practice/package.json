@@ -2,12 +2,13 @@
   "name": "modules-practice",
   "version": "1.0.0",
   "description": "",
-  "main": "./app.js",
-  "type": "module",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "OC",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
 }

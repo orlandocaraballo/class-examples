@@ -10,7 +10,7 @@
   "devDependencies": {},
   "description": "",
   "dependencies": {
-    "pg": "^8.0.3",
-    "sequelize": "^5.21.7"
+    "pg": "^8.5.1",
+    "sequelize": "^6.3.5"
   }
 }
