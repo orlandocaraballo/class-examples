@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import store, { INCREMENT } from "./store"; // imported for you already
+import store, { INCREMENT } from "./store";
+
+// we make sure to import connect / Provider from the react-redux module
 import { connect, Provider } from "react-redux";
 
 class Counter extends React.Component {
@@ -10,6 +12,7 @@ class Counter extends React.Component {
   }
 
   increment() {
+    // this corresponds to the function defined on line 49
     this.props.incrementCount();
   }
 
@@ -17,6 +20,7 @@ class Counter extends React.Component {
     return (
       <div id="container">
         <div id="counter">
+          {/* the this.props.countInReact value corresponds to the value stored in countInReact on line 39 */}
           <h1>{this.props.countInReact}</h1>
           <button type="button" onClick={this.increment}>
             Increment
@@ -34,7 +38,7 @@ class Counter extends React.Component {
 */
 const mapStateToProps = (state) => {
   return {
-    countInReact: state.count
+    countInReact: state.count,
   };
 };
 
@@ -47,9 +51,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     incrementCount: () => {
       dispatch({
-        type: INCREMENT
+        type: INCREMENT,
       });
-    }
+    },
   };
 };
 

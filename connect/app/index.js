@@ -1,39 +1,71 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import store, { increment } from "./store"; // imported for you already
+import store, { increment, decrement, loadStudents } from "./store"; // imported for you already
+import { Provider, connect } from "react-redux";
 
 class Counter extends React.Component {
   constructor() {
     super();
-    this.state = store.getState();
     this.clickHandler = this.clickHandler.bind(this);
   }
 
-  componentDidMount() {
-    this.functionToCallWhenWeWantToUnsubscribe = store.subscribe(() => {
-      this.setState(store.getState());
-    });
-  }
-
-  componentWillUnmount() {
-    this.functionToCallWhenWeWantToUnsubscribe();
-  }
-
   clickHandler() {
-    const action = increment();
-    store.dispatch(action);
+    // this.props.incrementer();
+    this.props.loadStudentsInReact();
   }
 
   render() {
+    const listItems =
+      this.props.studentsInReact &&
+      this.props.studentsInReact.map((student) => {
+        return <li>{student.name}</li>;
+      });
+
     return (
       <div id="container">
         <div id="counter">
-          <h1>{this.state.count}</h1>
           <button onClick={this.clickHandler}>Increment</button>
+          <ul>{listItems}</ul>
         </div>
       </div>
     );
   }
 }
 
-ReactDOM.render(<Counter />, document.getElementById("app"));
+const mapStateToProps = (state) => {
+  return {
+    counterValue: state.counterReducer.count,
+    studentsInReact: state.studentsReducer.students,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    incrementer: () => {
+      dispatch(increment());
+    },
+    decrementer: () => {
+      dispatch(decrement());
+    },
+    loadStudentsInReact: () => {
+      dispatch(loadStudents());
+    },
+  };
+};
+
+const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+function App() {
+  return (
+    <div>
+      <ConnectedCounter />
+    </div>
+  );
+}
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("app")
+);
