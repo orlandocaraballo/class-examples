@@ -1,0 +1,14 @@
+img {
+  width: 100%;
+  overflow-x: hidden;
+  opacity: 0;
+  transition: 1s opacity;
+}
+
+img.show {
+  opacity: 1;
+}
+
+footer {
+  font-size: 5em;
+}

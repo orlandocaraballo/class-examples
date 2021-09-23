@@ -18,7 +18,7 @@ class Main extends React.Component {
     const username = event.target.username.value;
 
     await axios.post("http://localhost:8080/api/test", {
-      username
+      username,
     });
   }
 

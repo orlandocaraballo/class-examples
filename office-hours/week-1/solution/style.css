@@ -1,0 +1,67 @@
+body {
+  overflow-x: hidden;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  display: flex;
+}
+
+h1 {
+  flex: 1;
+}
+
+nav {
+  font-size: 2em;
+  margin: 1em;
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  padding: 1em;
+}
+
+a:hover {
+  color: white;
+  background: purple;
+}
+
+img {
+  width: 100%;
+  opacity: 0;
+  position: relative;
+  margin: 1em 0;
+}
+
+img:nth-child(odd) {
+  transform: translateX(-100px);
+}
+
+img:nth-child(even) {
+  transform: translateX(100px);
+}
+
+img.show {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1s, transform 1s;
+}
+
+div {
+  position: relative;
+}
+
+footer {
+  font-size: 3em;
+  text-align: center;
+  padding: 5em;
+  transition: 0.25s background, 0.25s color;
+}
+
+footer:hover {
+  background: purple;
+  color: white;
+  cursor: pointer;
+}
