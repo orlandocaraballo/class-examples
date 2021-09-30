@@ -11,8 +11,24 @@ const User = db.define("user", {
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
+  phone: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+});
+
+// beforeCreate hook
+//  - this hook trigger before the create operation is run on User
+User.beforeCreate((user) => {
+  if (user.phone) {
+    const areaCode = user.phone.substr(0, 3);
+    const telephonePrefix = user.phone.substr(3, 3);
+    const lineNumber = user.phone.substr(6);
+
+    user.phone = `${areaCode}-${telephonePrefix}-${lineNumber}`;
+  }
 });
 
 // this defines a new model with the following information:
@@ -43,12 +59,21 @@ Post.belongsTo(User);
   const orlando = await User.create({
     name: "Orlando",
     email: "orlando@mail.com",
+    phone: "1234567890",
   });
 
+  // the code below is identical as above but in two steps
+  // const orlando = await User.new({
+  //   name: "Orlando",
+  //   email: "orlando@mail.com",
+  //   phone: "1234567890",
+  // });
+  // await orlando.save();
+
   // we can also create other users
-  const stephanie = await User.create({ name: "Stephanie" });
-  const helen = await User.create({ name: "Helen" });
-  const margarita = await User.create({ name: "Margarita" });
+  const joey = await User.create({ name: "Gagandeep" });
+  const jose = await User.create({ name: "Jose", phone: "0987654321" });
+  const christina = await User.create({ name: "Christina" });
 
   // here we create some posts and assign them to a user
   await Post.create({
@@ -57,15 +82,15 @@ Post.belongsTo(User);
   });
   await Post.create({
     content: "Wired headphones are the truth!",
-    userId: stephanie.id,
+    userId: joey.id,
   });
   await Post.create({
     content: "I enjoy plants on my head and as my background",
-    userId: helen.id,
+    userId: jose.id,
   });
   await Post.create({
     content: "I only drink the finest tea!",
-    userId: margarita.id,
+    userId: christina.id,
   });
 
   // when we have a reference to a particular object we can make
@@ -78,10 +103,10 @@ Post.belongsTo(User);
   // once we have a reference to a post, we can utilize the getUser() method
   //  due to our Post.belongsTo(User) association above
   // it is singular because a post belongs to a user (the foreign key is in the posts table)
-  const user = firstPost.getUser();
+  const user = await firstPost.getUser();
 
-  // because we have a reference to the post that is associated with the post
+  // because we have a reference to the post that is associated with the user
   //  we can also retrieve its properties by directly referencing the column name
   //  from the user instance much like we would retrieve a property from a plain js object
-  console.log(user.name, user.email);
+  console.log(user.name, user.email, user.phone);
 })();
