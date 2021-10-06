@@ -2,7 +2,7 @@ const Header = () => <header>Header</header>;
 
 const Article = () => <article>Article</article>;
 
-const Aside = () => <aside>Aside</aside>;
+const Aside = () => <aside>Aside in Class</aside>;
 
 const Main = () => (
   <main>
