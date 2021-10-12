@@ -4,45 +4,46 @@ import thunk from "redux-thunk";
 import axios from "axios";
 
 // Type constants
-export const INCREMENT = "INCREMENT";
-export const LOADED_STUDENTS = "LOADED_STUDENTS";
+export const LOADED_ANIME_FACTS = "LOADED_ANIME_FACTS";
 
 // Action creators
-export const increment = () => {
+export const loadedAnimeFacts = (animeFacts) => {
   return {
-    type: INCREMENT
+    type: LOADED_ANIME_FACTS,
+    animeFacts,
   };
 };
 
 export const loadData = () => {
   return async (dispatch, getState) => {
-    const response = await axios.get("https://sei-api.herokuapp.com/students");
+    let response;
+
+    try {
+      response = await axios.get(
+        "https://anime-facts-rest-api.herokuapp.com/api/v1"
+      );
+    } catch (e) {
+      console.error(e);
+    }
+
     const data = response.data;
 
     console.log(data);
 
-    dispatch({
-      type: LOADED_STUDENTS,
-      loadedStudents: data
-    });
+    dispatch(loadedAnimeFacts(data.data));
   };
 };
 
 // reducer
 
 const initialState = {
-  count: 0,
-  students: []
+  animeFacts: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case INCREMENT:
-      return {
-        count: state.count + 1
-      };
-    case LOADED_STUDENTS:
-      return { ...state, students: action.loadedStudents };
+    case LOADED_ANIME_FACTS:
+      return { ...state, animeFacts: action.animeFacts };
     default:
       return state;
   }

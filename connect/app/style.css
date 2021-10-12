@@ -53,6 +53,8 @@ ul {
   list-style: none;
   padding: 2em;
   margin: 2em 0 0;
+  overflow-y: scroll;
+  height: 400px;
 }
 
 li {
@@ -86,4 +88,12 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+img {
+  height: 200px;
+}
+
+#counter-button {
+  margin-bottom: 1em;
 }

@@ -1,38 +1,43 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import store, { loadData } from "./storeWithThunk"; // imported for you already
-import { INCREMENT } from "./actionTypes";
+import store, { loadData } from "./redux/storeWithThunk"; // imported for you already
+import { INCREMENT } from "./redux/actionTypes";
 import { connect, Provider } from "react-redux";
 
 class Counter extends React.Component {
   constructor() {
     super();
-    this.increment = this.increment.bind(this);
+    this.load = this.load.bind(this);
   }
 
-  increment() {
-    this.props.incrementCountInReact();
+  load() {
     this.props.loadDataInReact();
   }
 
   render() {
     // here I am first checking to see that studentsInReact exists
     //  before mapping thru the array
-    const studentElements =
-      this.props.studentsInReact &&
-      this.props.studentsInReact.map((student) => {
-        return <li>{student.name}</li>;
-      });
+    const animeFactsElements = this.props.animeFactsInReact.map((fact) => {
+      return (
+        <li key={fact.anime_id}>
+          {fact.anime_name}
+          <img src={fact.anime_img} />
+        </li>
+      );
+    });
 
     return (
       <div id="container">
         <div id="counter">
-          <h1>{this.props.countInReact}</h1>
-          <button type="button" onClick={this.increment}>
-            Increment
+          <button type="button" onClick={this.load}>
+            Load Anime Facts
           </button>
+          {this.props.animeFactsInReact.length > 0 ? (
+            <ul>{animeFactsElements}</ul>
+          ) : (
+            ""
+          )}
         </div>
-        <ul>{studentElements}</ul>
       </div>
     );
   }
@@ -46,8 +51,7 @@ class Counter extends React.Component {
 */
 const mapStateToProps = (state) => {
   return {
-    countInReact: state.count,
-    studentsInReact: state.students
+    animeFactsInReact: state.animeFacts,
   };
 };
 
@@ -59,14 +63,9 @@ const mapStateToProps = (state) => {
 */
 const mapDispatchToProps = (dispatch) => {
   return {
-    incrementCountInReact: () => {
-      dispatch({
-        type: INCREMENT
-      });
-    },
     loadDataInReact: () => {
       dispatch(loadData());
-    }
+    },
   };
 };
 
