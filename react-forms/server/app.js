@@ -8,14 +8,20 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api", router);
+app.use(express.static("public"));
 
 router.get("/test", (req, res) => {
   res.send("Hello");
 });
 
+router.post("/", (req, res) => {
+  console.log(req.body);
+  res.send("You just hit the landing route");
+});
+
 router.post("/test", (req, res) => {
   console.log(req.body);
-  res.send("Hello POST");
+  res.send("User has been created");
 });
 
 app.listen(PORT, () => {
