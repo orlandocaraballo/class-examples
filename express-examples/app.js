@@ -1,28 +1,56 @@
+// require your modules
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
-const cors = require("cors");
 
-app.use(morgan());
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// require our middlwares here (part 2)
 
-app.get("/", (req, res) => {
-  console.log(req.query);
-  res.send("HELLO");
+// mount our middlewares here (part 2)
+app.use(express.static("public"));
+app.use(require("morgan")("dev"));
+
+app.use((request, response, next) => {
+  // return all people
+  console.log(request.headers);
+  next();
 });
 
-app.get("/wiki", (req, res) => {
-  res.send(req.body);
+app.use((request, response, next) => {
+  // return all people
+  console.log(request.ip);
+  next();
 });
 
-app.post("/data", (req, res) => {
-  res.send(req.body);
-  // res.send([
-  //   { name: "orlando", age: 36 },
-  //   { name: "patrisha", age: 36 }
-  // ]);
+// define your routes here (part 1)
+
+// read
+
+app.get("/people", (request, response) => {
+  // return all people
+  response.send("Hello");
+});
+
+app.get("/people/:id", (request, response) => {
+  // return one person by id
+  response.send("Got person with id of");
+});
+
+// create
+app.post("/people", (request, response) => {
+  // create a person
+  // usually we return the person we created
+  response.send("Created person");
+});
+
+// update
+app.put("/people/:id", (request, response) => {
+  // updates one person by id
+  // usually we return the person we update
+});
+
+// delete
+app.delete("/people/:id", (request, response) => {
+  // delete one person by id
+  // usually we return the id of the person that was deleted
 });
 
 app.listen(3000, () => {
