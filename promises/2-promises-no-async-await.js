@@ -1,15 +1,13 @@
 const fs = require("fs").promises;
 
-const readFromFile = filename => {
-
-  fs.readFile(filename, "utf-8")
-    .then(data => {
-      console.log(data);
-    })
-    .catch(data => {
-      console.error(data);
-    });
-
+const readFromFile = (filename) => {
+  return fs.readFile(filename, "utf-8");
 };
 
-readFromFile("file.txt");
+readFromFile("file.txt")
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
