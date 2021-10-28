@@ -24,15 +24,4 @@ const getFood = async () => {
   client.end();
 };
 
-// define our response
-
-// first we must open a connection to our db
-client.connect();
-
-client.query("SELECT * FROM food").then((response) => {
-  console.log(response.rows);
-
-  client.end();
-});
-
-// getFood();
+getFood();
