@@ -1,20 +1,18 @@
 const { Client } = require("pg");
 
 // define the connection details
-const client = new Client("postgres://localhost/fooddb");
+const client = new Client("postgres://localhost/food");
 
 const getFood = async () => {
   // define our response
+  let response;
 
   // first we must open a connection to our db
   client.connect();
 
   try {
     // lets talk to our db
-    await client.query("SELECT * FROM food");
-    await client.query("SELECT * FROM food");
-    await client.query("SELECT * FROM food");
-    await client.query("SELECT * FROM food");
+    response = await client.query("SELECT * FROM meals");
   } catch (error) {
     console.error(error);
   }
