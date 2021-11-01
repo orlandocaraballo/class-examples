@@ -1,0 +1,22 @@
+{
+  "name": "express-sequelize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "seed": "node ./bin/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "sequelize": "^6.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
