@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Meal } = require("../db");
+const { Meal, Person } = require("../db");
 
 // create
 router.post("/", async (req, res) => {
@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
     res.send(await Meal.create(req.body));
   } catch (error) {
     // TODO: send to error middleware
-    console.error(error);
+    next(error);
   }
 });
 
@@ -19,23 +19,35 @@ router.get("/", async (req, res) => {
     res.send(await Meal.findAll());
   } catch (error) {
     // TODO: send to error middleware
-    console.error(error);
+    next(error);
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   // get a meal
   let meal;
 
   try {
-    // TODO: eager load person
-    meal = await Meal.findByPk(req.params.id);
+    // TODO: eager load people
+    meal = await Meal.findByPk(req.params.id, {
+      include: [
+        {
+          model: Person,
+        },
+      ],
+    });
 
-    // TODO: send 404 when not found
+    if (!meal) {
+      // next(error);
+      // res.status(404).send("Could not find resource");
+      // throw { status: 404, message: "Could not find resource" };
+      next({ status: 404, message: "Could not find resource" });
+      return;
+    }
+
     res.send(meal);
   } catch (error) {
-    // TODO: send to error middleware
-    console.error(error);
+    next(error);
   }
 });
 
@@ -47,12 +59,17 @@ router.put("/:id", async (req, res) => {
   try {
     meal = await Meal.findByPk(req.params.id);
 
+    if (!meal) {
+      next({ status: 404, message: "Could not find resource" });
+      return;
+    }
+
     await meal.update(req.body);
 
     res.send(meal);
   } catch (error) {
     // TODO: send to error middleware
-    console.error(error);
+    next(error);
   }
 });
 
@@ -64,12 +81,17 @@ router.delete("/:id", async (req, res) => {
   try {
     meal = await Meal.findByPk(req.params.id);
 
+    if (!meal) {
+      next({ status: 404, message: "Could not find resource" });
+      return;
+    }
+
     await meal.destroy();
 
     res.status(200).send();
   } catch (error) {
     // TODO: send to error middleware
-    console.error(error);
+    next(error);
   }
 });
 

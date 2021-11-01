@@ -14,7 +14,10 @@ const Person = db.define("Person", {
   },
 });
 
-Meal.belongsTo(Person, { as: "person" });
+orlando.setMeals()
+tacos.setPerson([])
+Person.hasMany(Meal);
+Meal.belongsTo(Person, { as: "person", foreignKey: "personId" });
 
 // notice how I am placing the client
 //  within another object literal

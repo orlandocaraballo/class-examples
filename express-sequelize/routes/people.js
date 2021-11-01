@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Person, Meal } = require("../db");
+const { Person } = require("../db");
 
 // create
 router.post("/", async (req, res) => {
@@ -28,6 +28,8 @@ router.get("/boomers", async (req, res) => {
   try {
     // TODO: set boomers variable using findBoomers()
     //  class method
+    const boomers = await Person.findBoomers();
+
     res.send(boomers);
   } catch (error) {
     // TODO: send to error middleware
@@ -45,6 +47,7 @@ router.get("/:id/age-in-dog-years", async (req, res) => {
 
     // TODO: set age in dog years using ageInDogYears()
     //  instance method
+    person.age = await person.ageInDogYears();
 
     // TODO: send 404 when not found
     res.send(person);

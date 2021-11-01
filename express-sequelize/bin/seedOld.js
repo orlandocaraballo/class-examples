@@ -1,4 +1,3 @@
-const { removeAllListeners } = require("nodemon");
 const { db, Person, Meal } = require("../db/dbOld");
 
 (async () => {
@@ -10,6 +9,7 @@ const { db, Person, Meal } = require("../db/dbOld");
   const patrisha = await Person.create({ name: "Patrisha" });
   const diana = await Person.create({ name: "Diana" });
   const janelly = await Person.create({ name: "Janelly" });
+  const ainsley = await Person.create({ name: "Ainsley" });
 
   // crate some meals
   const mangu = await Meal.create({ name: "mangu 👀" });
@@ -23,7 +23,7 @@ const { db, Person, Meal } = require("../db/dbOld");
   await mangu.setPerson(janelly);
   await ramen.setPerson(patrisha);
   await sangwich.setPerson(patrisha);
-  await jerkChicken.setPerson(orlando);
+  await jerkChicken.setPerson(ainsley);
   await sancocho.setPerson(orlando);
   await steak.setPerson(orlando);
 })();
