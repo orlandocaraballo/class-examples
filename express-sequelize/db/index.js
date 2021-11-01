@@ -17,7 +17,7 @@ const Person = db.define("Person", {
   },
 });
 
-// TODO: define findBoomers class method
+// findBoomers class method
 Person.findBoomers = function () {
   return this.findAll({
     where: {
@@ -28,7 +28,7 @@ Person.findBoomers = function () {
   });
 };
 
-// TODO: define ageInDogYears instance method
+// ageInDogYears instance method
 Person.prototype.ageInDogYears = function () {
   return Math.floor(this.age / 7);
 };
