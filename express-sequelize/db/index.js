@@ -21,7 +21,10 @@ const Person = db.define("Person", {
 
 // TODO: define ageInDogYears instance method
 
+// TODO: add alias for meals
 Person.belongsToMany(Meal, { through: "MealPeople", foreignKey: "personId" });
+
+// TODO: add alias for people
 Meal.belongsToMany(Person, { through: "MealPeople", foreignKey: "mealId" });
 
 // notice how I am placing the client
