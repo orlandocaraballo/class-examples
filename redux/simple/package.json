@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js"
@@ -10,6 +11,7 @@
   "author": "Orlando Caraballo",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.21",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6"
   }
