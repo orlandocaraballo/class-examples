@@ -19,12 +19,16 @@ const Main = () => (
       <Route exact path="/" component={Home} />
       <Route path="/fry" component={Fry} />
       <Route path="/bender" component={Bender} />
-      <Route exact path="/pups" render={() => <Pups pups={pups} />} />
-      <Route path="/pups/:id" component={Pup} />
+      <Route
+        exact
+        path="/pups"
+        render={(props) => <Pups {...props} pups={pups} />}
+      />
+      <Route path="/pups/:pupId" component={Pup} />
       {/*
       Routes are matched inclusively which means that all matches will display
         the corresponding component. To enable exclusive matching, you can use
-        the Switch component React Router component.
+        the Switch React Router component.
         https://v5.reactrouter.com/web/api/Switch
      */}
     </Switch>

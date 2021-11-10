@@ -13,7 +13,8 @@ class Pup extends React.Component {
   }
 
   componentDidMount() {
-    this.setState(pups[this.props.match.params.id - 1]);
+    console.log({ pups });
+    this.setState(pups[this.props.match.params.pupId - 1]);
   }
 
   handleClick(event) {
@@ -25,6 +26,8 @@ class Pup extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+
     const { name, age, imageSrc } = this.state;
 
     return (
