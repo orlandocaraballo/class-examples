@@ -17,14 +17,13 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+        },
       },
     ],
   },
   devServer: {
-    contentBase: path.join(__dirname, "public"),
-  },
-  node: {
-    Buffer: false,
-    process: false,
+    static: path.join(__dirname, "public"),
   },
 };
