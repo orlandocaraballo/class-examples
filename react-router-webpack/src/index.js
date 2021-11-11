@@ -4,7 +4,7 @@ import App from "./components/App.jsx";
 
 // we can either import BrowserRouter or HashRouter
 //  BrowserRouter uses more modern url syntax
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // Definition: A HashRouter / BrowserRouter keep the UI
 //  in sync with the browser url. HashRouter uses the hash portion

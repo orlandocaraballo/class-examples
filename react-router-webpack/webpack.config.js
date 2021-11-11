@@ -6,7 +6,8 @@ module.exports = {
     index: ["babel-polyfill", "./src/index.js"],
   },
   output: {
-    path: path.join(__dirname, "public"),
+    path: path.resolve(__dirname, "public"),
+    publicPath: "/",
     filename: "bundle.js",
   },
   context: __dirname,
@@ -29,5 +30,6 @@ module.exports = {
   },
   devServer: {
     static: path.join(__dirname, "public"),
+    historyApiFallback: true,
   },
 };
