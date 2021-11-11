@@ -1,17 +1,33 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import logger from "redux-logger";
-import axios from "axios";
-import thunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
+import reduxLogger from "redux-logger";
 
-import { animeFactsReducer } from "./reducers/animeFactsReducer";
-import { counterReducer } from "./reducers/counterReducer";
-// import { topLevelReducer } from "./reducers";
+// Type constants
+const INCREMENT = "INCREMENT";
 
-const topLevelReducer = combineReducers({
-  animeFactsReducer,
-  counterReducer,
-});
+// Action creators
+export const increment = () => {
+  return {
+    type: INCREMENT,
+  };
+};
 
-const store = createStore(topLevelReducer, applyMiddleware(logger, thunk));
+// reducer
+
+const initialState = {
+  count: 0,
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return {
+        count: state.count + 1,
+      };
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer, applyMiddleware(reduxLogger));
 
 export default store;

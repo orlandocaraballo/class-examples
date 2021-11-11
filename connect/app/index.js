@@ -1,58 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import store from "./redux/store";
-
-import { loadData } from "./redux/reducers/animeFactsReducer";
-import { increment } from "./redux/reducers/counterReducer";
-
-// imported for you already
-import { connect, Provider } from "react-redux";
+import store, { increment } from "./redux/store"; // imported for you already
+import { Provider, connect } from "react-redux";
 
 class Counter extends React.Component {
   constructor() {
     super();
-    this.handleLoad = this.handleLoad.bind(this);
-    this.handleIncrement = this.handleIncrement.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
-  handleLoad() {
-    this.props.loadDataInReact();
-  }
-
-  handleIncrement() {
+  clickHandler() {
     this.props.incrementInReact();
   }
 
   render() {
-    const { animeFactsInReact } = this.props;
-
-    const animeFactsElements = animeFactsInReact.map((fact) => {
-      return (
-        <li key={fact.anime_id}>
-          {fact.anime_name}
-          <img src={fact.anime_img} />
-        </li>
-      );
-    });
-
     return (
       <div id="container">
         <div id="counter">
-          <button
-            id="counter-button"
-            type="button"
-            onClick={this.handleIncrement}
-          >
-            {this.props.countInReact} Increment
-          </button>
-          <button
-            id="anime-facts-button"
-            type="button"
-            onClick={this.handleLoad}
-          >
-            Load Anime Facts
-          </button>
-          {animeFactsInReact.length > 0 ? <ul>{animeFactsElements}</ul> : ""}
+          <h1>{this.props.counterInReact}</h1>
+          <button onClick={this.clickHandler}>Increment</button>
         </div>
       </div>
     );
@@ -61,26 +27,20 @@ class Counter extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    animeFactsInReact: state.animeFactsReducer.animeFacts,
-    countInReact: state.counterReducer.count,
+    counterInReact: state.count,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadDataInReact: () => {
-      dispatch(loadData());
-    },
     incrementInReact: () => {
       dispatch(increment());
     },
   };
 };
 
-const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
+const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter); // currying
 
-// we must wrap our connected component
-//    with the Provider component
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedCounter />

@@ -33,6 +33,7 @@ router.get("/:id", async (req, res, next) => {
       include: [
         {
           model: Person,
+          as: "people",
         },
       ],
     });

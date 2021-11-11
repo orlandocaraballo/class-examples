@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Pups = (props) => {
-  console.log(props);
-
   const { pups } = props;
 
   return (
