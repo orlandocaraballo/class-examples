@@ -1,4 +1,9 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+// this plugin seems to require ecmascript modules and its output
+//  is stored in a key named default
+const InjectBodyPlugin = require("inject-body-webpack-plugin").default;
 
 module.exports = {
   mode: "development",
@@ -7,8 +12,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "public"),
-    publicPath: "/",
     filename: "bundle.js",
+    publicPath: "/",
   },
   context: __dirname,
   devtool: "source-map",
@@ -28,6 +33,10 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new InjectBodyPlugin({ content: "<div id='root'></div>" }),
+  ],
   devServer: {
     static: path.join(__dirname, "public"),
     historyApiFallback: true,

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = () => (
-  <React.Fragment>
+  <>
     <h1>Lorem Ipsum</h1>
 
     <p>
@@ -53,7 +53,7 @@ const Home = () => (
       libero. Donec tempor molestie odio quis dictum. Cras ex turpis, ultrices
       quis arcu et, pretium consectetur nunc.
     </p>
-  </React.Fragment>
+  </>
 );
 
 export default Home;

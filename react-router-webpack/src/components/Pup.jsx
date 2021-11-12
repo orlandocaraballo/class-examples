@@ -31,12 +31,12 @@ class Pup extends React.Component {
     const { name, age, imageSrc } = this.state;
 
     return (
-      <React.Fragment>
+      <>
         <h3>{name}</h3>
         <em>Age: {age}</em>
         <img src={`/${imageSrc}`} />
         <button onClick={this.handleClick}>Go Back</button>
-      </React.Fragment>
+      </>
     );
   }
 }
