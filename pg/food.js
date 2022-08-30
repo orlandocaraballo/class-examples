@@ -1,7 +1,7 @@
 const { Client } = require("pg");
 
 // define the connection details
-const client = new Client("postgres://localhost/food");
+const client = new Client("postgres://localhost/wnews");
 
 const getFood = async () => {
   // define our response
@@ -12,7 +12,7 @@ const getFood = async () => {
 
   try {
     // lets talk to our db
-    response = await client.query("SELECT * FROM meals");
+    response = await client.query("SELECT * posts WHERE posts.id = 1000000");
   } catch (error) {
     console.error(error);
   }
