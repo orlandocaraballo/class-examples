@@ -1,6 +1,5 @@
 const PORT = 3000;
 const express = require("express");
-const { Meal, Student } = require("./db");
 
 const app = express();
 
@@ -10,79 +9,13 @@ app.get("/", (req, res) => {
   res.send("Good to go!");
 });
 
-// meal tracker
-
-// create
-app.post("/meals", async (req, res, next) => {
-  try {
-    const meal = await Meal.create(req.body);
-
-    res.json(meal);
-  } catch (err) {
-    next(err);
-  }
-});
-
-// read all
-app.get("/meals", async (req, res, next) => {
-  try {
-    const meals = await Meal.findAll();
-
-    res.json(meals);
-  } catch (err) {
-    next(err);
-  }
-});
-
-// read one
-app.get("/meals/:id", async (req, res, next) => {
-  try {
-    // const meal = await Meal.findOne({
-    //   where: {
-    //     id: req.params.id,
-    //   },
-    // });
-
-    const meal = await Meal.findByPk(req.params.id);
-
-    res.json(meal);
-  } catch (err) {
-    next(err);
-  }
-});
-
-// update
-app.put("/meals/:id", async (req, res, next) => {
-  try {
-    const meal = await Meal.findByPk(req.params.id);
-
-    await meal.update(req.body);
-
-    // reloads data from database onto model instance
-    await meal.reload();
-
-    res.json(meal);
-  } catch (err) {
-    next(err);
-  }
-});
-
-// delete
-app.delete("/meals/:id", async (req, res, next) => {
-  try {
-    const meal = await Meal.findByPk(req.params.id);
-
-    await meal.destroy();
-
-    res.json(meal);
-  } catch (err) {
-    next(err);
-  }
-});
+app.use("/meals", require("./routes/meals"));
+app.use("/students", require("./routes/students"));
+app.use("/ingredients", require("./routes/ingredients"));
 
 // error handler
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json(err.message);
+  res.status(err.status || 500).send(err.message);
 });
 
 app.listen(PORT, () => {

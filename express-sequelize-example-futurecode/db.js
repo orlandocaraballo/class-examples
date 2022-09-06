@@ -15,14 +15,25 @@ const Student = sequelize.define("Student", {
   },
 });
 
+const Ingredient = sequelize.define("Ingredient", {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
 // noor.getMeals()
 Student.hasMany(Meal);
 
 // meal.getStudent()
 Meal.belongsTo(Student);
 
+Meal.belongsToMany(Ingredient, { through: "MealIngredients" });
+Ingredient.belongsToMany(Meal, { through: "MealIngredients" });
+
 module.exports = {
   Meal,
   Student,
+  Ingredient,
   sequelize,
 };
