@@ -1,11 +1,16 @@
-const anchors = document.querySelector("nav");
+const nav = document.querySelector("nav");
+const anchors = document.querySelectorAll("a");
 
-console.log(anchors);
+console.log(nav);
 
-// .addEventListener("click", function (event) {
-//     event.preventDefault();
+nav.addEventListener("click", function (event) {
+  event.preventDefault();
 
-//     alert("Hello");
-//     // console.log(this);
-//     // console.log(event.target);
-//   });
+  alert("Hello");
+});
+
+anchors[1].addEventListener("click", function (event) {
+  event.preventDefault();
+
+  alert("Hello from the second link");
+});
