@@ -1,0 +1,21 @@
+{
+  "name": "park-ave",
+  "version": "1.0.0",
+  "description": "Mr monopoly's 🧐 rental properties",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "seed": "node ./bin/seed.js"
+  },
+  "keywords": [],
+  "author": "Orlando C",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "sequelize": "^6.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
