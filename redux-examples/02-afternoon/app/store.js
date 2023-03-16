@@ -1,6 +1,5 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
 import { INCREMENT } from "./actionTypes";
-import { logger } from "redux-logger";
 
 // Still need:
 //  - action type
@@ -9,7 +8,7 @@ import { logger } from "redux-logger";
 //  - reducer
 
 const initialState = {
-  count: 0
+  count: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,8 +21,8 @@ const reducer = (state = initialState, action) => {
 };
 
 const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  reducer
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export default store;

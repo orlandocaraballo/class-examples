@@ -2,55 +2,64 @@
 const express = require("express");
 const app = express();
 
-// require our middlwares here (part 2)
+// require our middlewares
+const morgan = require("morgan");
+const path = require("path");
 
-// mount our middlewares here (part 2)
-app.use(express.static("public"));
-app.use(require("morgan")("dev"));
+// app.use
+// function doWork() {
+//   console.log("Do some work!");
+// }
 
-app.use((request, response, next) => {
-  // return all people
-  console.log(request.headers);
-  next();
+// we assign our middlewares
+app.use(express.static(path.join(__dirname, "public")));
+app.use(morffgan("dev"));
+
+// app.use((request, response, next) => {
+//   console.log(request.method, " : ", request.headers);
+//   next();
+// });
+
+// app.use((request, response, next) => {
+//   console.log("Second middleware");
+//   next();
+// });
+
+// API routes
+app.get("/", (request, response) => {
+  response.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <link rel="stylesheet" href="/style.css" />
+      <script src="/script.js"></script>
+    </head>
+    <body>
+      Hello this is the body
+    </body>
+    </html>
+  `);
 });
 
-app.use((request, response, next) => {
-  // return all people
-  console.log(request.ip);
-  next();
+// app.get("/style.css", (request, response) => {
+//   response.send("body { color: red; }");
+// });
+
+app.get("/orlando", (request, response) => {
+  response.send("<h1>Hello my name is Orlando</h1>");
 });
 
-// define your routes here (part 1)
-
-// read
-
-app.get("/people", (request, response) => {
-  // return all people
-  response.send("Hello");
+app.get("/students", (request, response) => {
+  response.send("<h1>This is the students route</h1>");
 });
 
-app.get("/people/:id", (request, response) => {
-  // return one person by id
-  response.send("Got person with id of");
-});
-
-// create
-app.post("/people", (request, response) => {
-  // create a person
-  // usually we return the person we created
-  response.send("Created person");
-});
-
-// update
-app.put("/people/:id", (request, response) => {
-  // updates one person by id
-  // usually we return the person we update
-});
-
-// delete
-app.delete("/people/:id", (request, response) => {
-  // delete one person by id
-  // usually we return the id of the person that was deleted
+app.get("/students/:studentId", (request, response) => {
+  console.log(request.params);
+  // 100 students in a database
+  //  - to retrieve 3rd student you need an id
+  response.send(
+    `<h1>This is the students route with id of ${request.params.studentId}</h1>`
+  );
 });
 
 app.listen(3000, () => {

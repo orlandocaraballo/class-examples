@@ -1,3 +1,11 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
@@ -8,26 +16,17 @@
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "clickHandler": () => (/* binding */ clickHandler),
-/* harmony export */   "scrollHandler": () => (/* binding */ scrollHandler),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// named exports
-const clickHandler = (event) => {
-  console.log("clicked");
-};
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"clickHandler\": () => (/* binding */ clickHandler),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   \"scrollHandler\": () => (/* binding */ scrollHandler)\n/* harmony export */ });\n// named exports\nconst clickHandler = (event) => {\n  console.log(\"clicked\");\n};\n\nconst scrollHandler = (event) => {\n  console.log(\"scrolling\");\n};\n\n// default export\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((name) => {\n  console.log(name);\n});\n\n\n//# sourceURL=webpack://webpack-practice/./src/handlers.js?");
 
-const scrollHandler = (event) => {
-  console.log("scrolling");
-};
+/***/ }),
 
-// default export
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((name) => {
-  console.log(name);
-});
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handlers */ \"./src/handlers.js\");\n// default import, { named import }\n\n\nconst button = document.getElementsByTagName(\"button\")[0];\n\nbutton.addEventListener(\"click\", _handlers__WEBPACK_IMPORTED_MODULE_0__.clickHandler);\n\nwindow.addEventListener(\"scroll\", _handlers__WEBPACK_IMPORTED_MODULE_0__.scrollHandler);\n\n(0,_handlers__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"Orlando\");\n\n\n//# sourceURL=webpack://webpack-practice/./src/index.js?");
 
 /***/ })
 
@@ -87,27 +86,11 @@ const scrollHandler = (event) => {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handlers */ "./src/handlers.js");
-// default import, { named import }
-
-
-const button = document.getElementsByTagName("button")[0];
-
-button.addEventListener("click", _handlers__WEBPACK_IMPORTED_MODULE_0__.clickHandler);
-
-window.addEventListener("scroll", _handlers__WEBPACK_IMPORTED_MODULE_0__.scrollHandler);
-
-(0,_handlers__WEBPACK_IMPORTED_MODULE_0__["default"])("Orlando");
-
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=bundle.js.map

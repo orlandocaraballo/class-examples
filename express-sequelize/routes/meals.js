@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Meal, Person } = require("../db");
 
 // create
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   // create a meal
   try {
     res.send(await Meal.create(req.body));
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
 });
 
 // read
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   // get all meals
   try {
     res.send(await Meal.findAll());
@@ -53,7 +53,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // update
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res, next) => {
   // update a meal
   let meal;
 
@@ -75,7 +75,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // delete
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   // delete a meal
   let meal;
 

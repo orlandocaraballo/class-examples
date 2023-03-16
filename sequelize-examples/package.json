@@ -1,16 +1,15 @@
 {
-  "name": "sequelize_examples",
+  "name": "sequelize-examples",
   "version": "1.0.0",
+  "description": "",
   "main": "db.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Orlando C",
   "license": "ISC",
-  "devDependencies": {},
-  "description": "",
   "dependencies": {
-    "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "pg": "^8.10.0",
+    "sequelize": "^6.29.2"
   }
 }

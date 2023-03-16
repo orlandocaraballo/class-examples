@@ -1,0 +1,39 @@
+section {
+  border: 1px solid blue;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: red;
+  display: inline-block;
+  width: 200px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-transform: uppercase;
+}
+
+header a {
+  color: blue;
+}
+
+header > nav > a {
+  color: magenta;
+}
+
+@media (max-width: 500px) {
+  a {
+    width: 50px;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 700px) {
+  a {
+    width: 100px;
+  }
+}

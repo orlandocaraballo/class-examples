@@ -10,7 +10,7 @@
   "author": "Orlando Caraballo",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.56.1",
-    "webpack-cli": "^4.8.0"
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   }
 }

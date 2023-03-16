@@ -1,6 +1,6 @@
 const fs = require("fs").promises;
 
-const readFromFile = async filename => {
+const readFromFile = async (filename) => {
   try {
     const data = await fs.readFile(filename, "utf-8");
 

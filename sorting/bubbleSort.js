@@ -36,7 +36,7 @@ function bubbleSort(array) {
   return array;
 }
 
-// get console arguments if they exist otherwise detault to 100
+// get console arguments if they exist otherwise default to 100
 const numberOfElements = Number(process.argv[2]) || 100;
 const constructRandomNumberArray = require("./constructRandomNumberArray");
 const array = constructRandomNumberArray(numberOfElements);

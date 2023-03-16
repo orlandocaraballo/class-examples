@@ -1,49 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-
-    // required in order for this to work within buttonClick
-    this.goUp = this.goUp.bind(this);
-    this.goDown = this.goDown.bind(this);
-  }
+function App() {
+  const [count, setCount] = useState(0);
 
   // button handler
-  goUp(event) {
+  function goUp(event) {
     event.preventDefault();
 
     // set state of counter
-    this.setState((state, props) => ({
-      count: ++state.count,
-    }));
+    setCount(count + 1);
 
-    console.log(`The current count is now set to: ${this.state.count}`);
+    console.log(`The current count is now set to: ${count}`);
   }
 
-  goDown(event) {
+  function goDown(event) {
     event.preventDefault();
 
     // set state of counter
-    this.setState((state, props) => ({
-      count: --state.count,
-    }));
+    setCount(count - 1);
 
-    console.log(`The current count is now set to: ${this.state.count}`);
+    console.log(`The current count is now set to: ${count}`);
   }
 
-  render() {
-    return (
-      <ul>
-        <div id="count">Count: {this.state.count}</div>
+  // always return something
+  return (
+    <ul>
+      <div id="count">Count: {count}</div>
 
-        <button onClick={this.goUp}>Go up!</button>
-        <button onClick={this.goDown}>Go down!</button>
-      </ul>
-    );
-  }
+      <button onClick={goUp}>Go up!</button>
+      <button onClick={goDown}>Go down!</button>
+    </ul>
+  );
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

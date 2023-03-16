@@ -67,6 +67,9 @@ function merge(leftArray, rightArray, comparator) {
   return sortedArray;
 }
 
+// [6, 16, -9, 10] => [[6, 16], [-9, 10]] => [[6],[16],[-9], [10]]
+
+// [[6],[16],[-9], [10]] => [[6, 16], [-9,10]] => [-9,6,10,16]
 function mergeSort(array, comparator) {
   // --------- BASE CASE BELOW ---------
 
@@ -78,7 +81,7 @@ function mergeSort(array, comparator) {
   // --------- RECURSIVE STEP BELOW ---------
 
   // split the array in half
-  const [left, right] = split(array);
+  const [left, right] = split(array); // [6, 16, -9, 10] => [[6, 16], [-9, 10]]
 
   // sort left half
   const leftSortedHalf = mergeSort(left, comparator);

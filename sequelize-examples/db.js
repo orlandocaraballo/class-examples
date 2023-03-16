@@ -1,112 +1,117 @@
+// load sequelize
 const Sequelize = require("sequelize");
-const db = new Sequelize("postgres://localhost/sequelize-examples");
+const db = new Sequelize("postgres://localhost/meals");
 
-// this defines our user model
-//  notice how user is singular but the corresponding
-//  table name would be plural
+// MODEL(S)
+// ------------
+// user model (with validations)
 const User = db.define("user", {
-  name: {
-    type: Sequelize.STRING,
+  // name of field / column is fullname
+  fullname: {
+    // type of column is varchar / Sequelize.STRING
+    type: Sequelize.STRING, // varchar()
     allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: true,
+  age: {
+    type: Sequelize.INTEGER,
   },
   phone: {
     type: Sequelize.STRING,
-    allowNull: true,
   },
 });
 
-// beforeCreate hook
-//  - this hook trigger before the create operation is run on User
-User.beforeCreate((user) => {
-  if (user.phone) {
-    const areaCode = user.phone.substr(0, 3);
-    const telephonePrefix = user.phone.substr(3, 3);
-    const lineNumber = user.phone.substr(6);
-
-    user.phone = `${areaCode}-${telephonePrefix}-${lineNumber}`;
-  }
-});
-
-// this defines a new model with the following information:
-//  - table name = posts
-//  - columns = content | string
-//  - automatically created columns = id | integer, createdAt | datetime, updatedAt | datetime
-//  - model name = post
-//  - model constant name = Post
-const Post = db.define("post", {
-  content: {
-    type: Sequelize.TEXT,
-    allowNull: false,
+// meal model
+const Meal = db.define("meal", {
+  name: {
+    type: Sequelize.STRING,
   },
 });
 
-// set our associations between our models
-User.hasMany(Post);
-Post.belongsTo(User);
+// ASSOCIATIONS
+// ------------
+// let's make users and meals correspond to each other
 
-// define an auto executing async function
+// one to one relationship
+// User.hasOne(Meal); // defines [user instance].setMeal()
+// Meal.belongsTo(User); // defines [meal instance].setUser()
+
+// one to many relationship
+// User.hasMany(Meal); // defines [user instance].setMeals()
+// Meal.belongsTo(User); // defines [meal instance].setUser()
+
+// many to many relationship through "meal_users" table
+User.belongsToMany(Meal, { through: "meal_users" }); // defines [user instance].setMeals()
+Meal.belongsToMany(User, { through: "meal_users" }); // defines [meal instance].setUsers()
+
+// HOOKS
+// -----
+// beforeValidate
+// afterValidate
+// beforeCreate / beforeSave
+// afterCreate / afterSave
+// beforeUpdate / beforeSave
+// afterUpdate / afterSave
+User.beforeSave((user) => {
+  const areaCode = user.phone.substr(0, 3);
+  const prefix = user.phone.substr(3, 3);
+  const lineNumber = user.phone.substr(6);
+
+  // (123) 899-1232
+  user.phone = `(${areaCode}) ${prefix}-${lineNumber}`;
+});
+
+// auto-executing function
 (async () => {
-  // tell the database to sync
+  // this tells the database to create all tables
   await db.sync({ force: true });
 
-  // here we create a dummy user
-  // the create command will make the call to the db
-  //  and create it in the users table
+  // CREATE data
   const orlando = await User.create({
-    name: "Orlando",
-    email: "orlando@mail.com",
+    fullname: "Orlando C",
+    age: 39,
     phone: "1234567890",
   });
 
-  // the code below is identical as above but in two steps
-  // const orlando = await User.new({
-  //   name: "Orlando",
-  //   email: "orlando@mail.com",
-  //   phone: "1234567890",
+  // const orlando = User.new({ fullname: "Orlando C", age: 39 })
+  // await orlando.save()
+
+  const malcolm = await User.create({
+    fullname: "Malcolm V",
+    age: 34,
+    phone: "0987654321",
+  });
+  const frenchToast = await Meal.create({ name: "french toast" });
+  const lasagna = await Meal.create({ name: "lasagna" });
+
+  // FIND data
+
+  // returns an array
+  // const users = await User.findAll(); // select * from users;
+
+  // const orlando = await User.findOne({
+  //   where: {
+  //     age: 39,
+  //   },
   // });
-  // await orlando.save();
 
-  // we can also create other users
-  const joey = await User.create({ name: "Gagandeep" });
-  const jose = await User.create({ name: "Jose", phone: "0987654321" });
-  const christina = await User.create({ name: "Christina" });
+  // const firstUser = await User.findByPk(1);
 
-  // here we create some posts and assign them to a user
-  await Post.create({
-    content: "I say weird things sometimes",
-    userId: orlando.id,
-  });
-  await Post.create({
-    content: "Wired headphones are the truth!",
-    userId: joey.id,
-  });
-  await Post.create({
-    content: "I enjoy plants on my head and as my background",
-    userId: jose.id,
-  });
-  await Post.create({
-    content: "I only drink the finest tea!",
-    userId: christina.id,
-  });
+  // UPDATING data
+  // await orlando.update({ age: 23 });
 
-  // when we have a reference to a particular object we can make
-  //  use of the getPosts() method due to our User.hasMany(Post) association above
-  const posts = await orlando.getPosts();
+  // console.log(firstUser);
 
-  // we can grab the first post from our collection object
-  const firstPost = posts[0];
+  // DELETING data
+  // await orlando.destroy();
 
-  // once we have a reference to a post, we can utilize the getUser() method
-  //  due to our Post.belongsTo(User) association above
-  // it is singular because a post belongs to a user (the foreign key is in the posts table)
-  const user = await firstPost.getUser();
-
-  // because we have a reference to the post that is associated with the user
-  //  we can also retrieve its properties by directly referencing the column name
-  //  from the user instance much like we would retrieve a property from a plain js object
-  console.log(user.name, user.email, user.phone);
+  // MAGIC METHODS
+  // ------------
+  await orlando.setMeals([frenchToast, lasagna]);
+  await lasagna.addUser(malcolm);
+  // await lasagna.setUsers(orlando);
+  // await frenchToast.setUser(orlando);
+  // await frenchToast.setUser(orlando);
 })();
