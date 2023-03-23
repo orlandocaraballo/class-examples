@@ -1,41 +1,17 @@
 import axios from "axios";
-import React, { useState, createRef } from "react";
+import React, { useState } from "react";
+import MyRoutes from "./MyRoutes";
+import { Link } from "react-router-dom";
+import "./App.css";
 
-function App() {
-  const [data, setData] = useState("");
-  // const dataRef = createRef();
-
-  // function handleChange(event) {
-  //   console.log(dataRef.current.value);
-  //   // setData(event.target.value);
-  // }
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    // console.log(event.target.data.value);
-
-    const { data: pokemon } = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${data}`
-    );
-
-    console.log(pokemon);
-  }
-
+const App = () => {
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input
-          type="text"
-          name="data"
-          placeholder="Data"
-          value={data}
-          onChange={(event) => setData(event.target.value)}
-        />
-      </div>
+    <>
+      <Link to="/">Search</Link>
       <br />
-      <button type="submit">Go</button>
-    </form>
+      <MyRoutes />
+    </>
   );
-}
+};
 
 export default App;
